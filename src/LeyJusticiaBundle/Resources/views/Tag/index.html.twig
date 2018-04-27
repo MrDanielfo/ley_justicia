@@ -1,0 +1,42 @@
+{% extends "LeyJusticiaBundle::layout.html.twig" %}
+
+{% block content %}
+    
+    {% for message in app.session.flashbag().get('status') %}
+        <h2 class="welcome">{{ message }}</h2>
+    {% endfor %}
+    
+    <div class="addTag">
+       
+        <a href="{{path('add_tag')}}" class="button">Añadir etiqueta</a>
+    
+    </div>
+        
+    <div class="contenedor-CatTag">
+        
+        <table class="miTabla">
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Opciones</th>
+            </tr>
+            {% for tag in tags %}
+            <tr>
+                <td class="nombre">{{tag.name}}</td>
+                <td class="descripcion">{{tag.description}}</td>
+                {% if tag.entryTag|length == 0 %}
+                    <td class="eliminar"><a href="{{path('delete_tag', {"id" : tag.id })}}" class="button">Eliminar</a></td>
+                {% else %}
+                    <td class="eliminar">Etiqueta en uso</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    
+    </div>
+    
+    
+    
+    
+    
+{% endblock %}

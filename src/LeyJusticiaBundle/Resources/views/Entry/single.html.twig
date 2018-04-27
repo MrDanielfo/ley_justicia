@@ -1,0 +1,29 @@
+{% extends "LeyJusticiaBundle::layout.html.twig" %}
+
+{% block content %}
+        
+    <section>
+       <div class="single-articulo">
+           
+           <p class="single-categoria">{{ entry.category.name }}</p>
+           
+           <h2 class="single-titulo">{{ entry.title }}</h2>
+           <img src="{{ asset("uploads/"~entry.image)}}" alt="{{entry.title}}" class="single-imagen">
+           
+           <p class="single-autor">Por : {{ entry.user.name }}</p>
+           
+           <div class="contenido">
+               <p class="single-contenido">{{entry.content}}</p>
+           </div>
+           
+           {% for et in entry.entryTag %}
+            <p class="etiquetas">{{ et.tag.name }}</p>
+           {% endfor %}
+       </div>
+    </section>
+    
+    
+    
+    
+    
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "LeyJusticiaBundle::layout.html.twig" %}
+
+
+{% block content %}
+    
+    {% if is_granted('ROLE_ADMIN') %}
+        <p>Estás logueado como usuario todo poderoso</p>
+    {% endif %}
+    
+    {% if is_granted('ROLE_USER') %}
+        <p>Estás logueado sólo como usuario</p>
+    {% endif %}
+    
+    <div class="contenedor-login-crud">
+        <h2 class="titulo-login-crud">Inicia Sesión</h2>
+        <form action="{{ path('login_check') }}" class="login-crud" method="post">
+          <div class="caja">
+            <input type="email" id="username" class="text" name="_username" value="{{ last_username }}" placeholder="E-mail">
+          </div>
+          <div class="caja">
+            <input type="password" class="text" name="_password" id="password" placeholder="Password">
+          </div>
+          <div class="caja">
+            <input type="submit" class="button" value="Iniciar Sesión">
+            <input type="hidden" name="_target_path" value="/">
+          </div>
+        </form>
+    </div>
+    
+    
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "LeyJusticiaBundle::layout.html.twig" %}
+
+{% block content %}
+    
+    {% if app.user != null %}
+        <h2 class="welcome">Bienvenid@, {{app.user.name}}</h2>
+        {% else %}  
+        <h2 class="welcome">Bienvenid@, usuario visitante</h2>
+    {% endif %}
+    <section>
+        <div class="cover">
+            <h2 class="contenido">Ley y Justicia: el blog para abogados hecho por abogados</h2>
+        </div>
+    </section>
+  
+{% endblock %}
+
+

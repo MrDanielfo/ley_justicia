@@ -1,0 +1,37 @@
+{% extends "LeyJusticiaBundle::layout.html.twig" %}
+
+{% block content %}
+    
+    {% for message in app.session.flashbag().get('status') %}
+        <h2 class="welcome">{{ message }}</h2>
+    {% endfor %}
+    
+    <section>
+        <div class="cover especialistas-portada">
+            <h2 class="contenido page-articulos">Especialistas</h2>
+        </div>
+    </section>
+    
+        
+    <section>
+        
+            
+        <div class="especialistas perfil">
+            <div class="circulo">
+              <img src="{{ asset("users/"~user.image)}}" alt="{{user.name}}" class="especialistas">
+            </div>
+          <h2 class="titulo especialistas">
+            {{ user.name }}</a
+          </h2>  
+        </div>    
+           
+        <p class="single-autor">Correo electrónico : {{ user.email }}</p>
+           
+        <div class="contenido">
+               <p class="single-contenido">{{user.biography}}</p>
+        </div>
+        
+    </section>
+    
+    
+{% endblock %}

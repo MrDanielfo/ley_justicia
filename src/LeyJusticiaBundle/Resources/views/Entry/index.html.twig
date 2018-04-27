@@ -1,0 +1,54 @@
+{% extends "LeyJusticiaBundle::layout.html.twig" %}
+
+{% block content %}
+    
+    {% for message in app.session.flashbag().get('status') %}
+        <h2 class="welcome">{{ message }}</h2>
+    {% endfor %}
+    
+    <section>
+        <div class="cover articulos">
+            <h2 class="contenido page-articulos">Artículos</h2>
+        </div>
+    </section>
+    
+    <div class="addTag">
+        {% if (app.user.id is defined) %}
+        <a href="{{path('add_entry')}}" class="button">Escribir Artículo</a>
+        {% endif  %}
+    </div>
+        
+    <section>
+        {% for entry in entries %}
+        <div class="cajaarticulo">
+            <img src="{{ asset("uploads/"~entry.image)}}" alt="{{entry.title}}" class="articulo">
+            <h2 class="titulo"><a href="{{path('single_entry', {"id": entry.id,"title" : entry.title })}}" class="titulo-enlace">{{ entry.title }}</a></h2>
+            {% if (app.user.id is defined) and (entry.user.id == app.user.id) %}
+                <a href="{{path('edit_entry', {"id" : entry.id })}}" class="button articulo" style="float:left;">Editar</a>
+                <a href="{{path('delete_entry', {"id" : entry.id })}}" class="button articulo" style="float:right;">Eliminar</a>
+            {% endif  %}
+        </div>        
+        {% endfor %}
+    </section>
+    
+    <ul class="paginacion">
+        
+        {% if(page==1) %}
+            
+        {% else %}
+            {% set page = page - 1 %}
+        {% endif %}
+        <li><a href="{{ path('index_entry', {"page" : page }) }}">&laquo</a></li>
+        {% for i in 1..pagesCount %}
+             <li><a href="{{ path('index_entry', {"page" : i }) }}">{{ i }}</a></li>
+        {% endfor %}
+        
+        {% if(page_m==pagesCount) %}
+            
+        {% else %}
+            {% set page_m = page_m + 1 %}
+        {% endif %}
+        <li><a href="{{ path('index_entry', {"page" : page_m }) }}">&raquo</a></li>
+    </ul>
+    
+{% endblock %}

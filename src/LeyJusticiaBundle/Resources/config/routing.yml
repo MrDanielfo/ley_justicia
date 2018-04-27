@@ -1,0 +1,81 @@
+index_user:
+    path: /authors
+    defaults: { _controller: LeyJusticiaBundle:User:index }
+    
+author_profile:
+    path: /authors/profile/{id}
+    defaults: { _controller: LeyJusticiaBundle:User:showProfile }
+
+edit_user_profile:
+    path: /users/edit/{id}
+    defaults: { _controller: LeyJusticiaBundle:User:editProfile }
+
+index_entry:
+    path: /entry/{page}
+    defaults: { _controller: LeyJusticiaBundle:Entry:index, page:1 }
+    
+add_entry:
+    path: /entries/add
+    defaults: { _controller: LeyJusticiaBundle:Entry:addEntry }
+
+edit_entry:
+    path: /entries/edit/{id}
+    defaults: { _controller: LeyJusticiaBundle:Entry:editEntry }
+    
+delete_entry:
+    path: /entries/delete/{id}
+    defaults: { _controller: LeyJusticiaBundle:Entry:deleteEntry }
+
+single_entry:
+    path: /entries/single/{id}-{title}
+    defaults: { _controller: LeyJusticiaBundle:Entry:singleEntry }
+
+index_cat:
+    path: /categories
+    defaults: { _controller: LeyJusticiaBundle:Category:index }
+
+add_cat:
+    path: /categories/add
+    defaults: { _controller: LeyJusticiaBundle:Category:addCat }
+    
+edit_cat:
+    path: /categories/edit/{id}
+    defaults: { _controller: LeyJusticiaBundle:Category:edit }
+    
+delete_cat:
+    path: /categories/delete/{id}
+    defaults: { _controller: LeyJusticiaBundle:Category:delete }
+    
+entries_cat:
+    path: /category/{id}/{page}
+    defaults: { _controller: LeyJusticiaBundle:Category:entriesCategories, page: 1 }
+    
+index_tag:
+    path: /tags
+    defaults: { _controller: LeyJusticiaBundle:Tag:index }
+
+add_tag:
+    path: /tags/add
+    defaults: { _controller: LeyJusticiaBundle:Tag:addTag }
+    
+delete_tag:
+    path: /tags/delete/{id}
+    defaults: { _controller: LeyJusticiaBundle:Tag:delete }
+
+register:
+    path: /register
+    defaults: { _controller: LeyJusticiaBundle:User:register }
+
+login:
+    path: /login
+    defaults: { _controller: LeyJusticiaBundle:User:login }
+
+login_check: 
+    path: /login_check
+    
+logout:
+    path: /logout
+
+ley_justicia_homepage:
+    path:     /
+    defaults: { _controller: LeyJusticiaBundle:Default:index }

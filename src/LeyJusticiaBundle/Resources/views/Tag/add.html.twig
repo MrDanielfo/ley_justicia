@@ -1,0 +1,13 @@
+{% extends "LeyJusticiaBundle::layout.html.twig" %}
+
+{% block content %}
+    
+    <div class="contenedor-login-crud"> 
+        
+        <h2 class="titulo-login-crud tags">Añadir etiquetas</h2>
+        {{form_start(form, {'action': '', 'method': 'POST', 'attr' : { 'class' : 'login-crud' } })}}
+        {{form_end(form)}}
+        
+    </div>
+    
+{% endblock %}

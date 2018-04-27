@@ -1,0 +1,52 @@
+{% extends "LeyJusticiaBundle::layout.html.twig" %}
+
+{% block content %}
+    
+    {% for message in app.session.flashbag().get('status') %}
+        <h2 class="welcome">{{ message }}</h2>
+    {% endfor %}
+    
+    <section>
+        <div class="cover categorias">
+            <h2 class="contenido page-articulos">Categorías</h2>
+        </div>
+    </section>
+    
+    <div class="addTag">
+        {% if (app.user.id is defined) %}
+        <a href="{{path('add_cat')}}" class="button">Añadir categoría</a>
+        {% endif %}
+    </div>
+        
+    <div class="contenedor-CatTag">
+        
+        <table class="miTabla">
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th colspan="3">Opciones</th>
+            </tr>
+            {% for category in categories %}
+            <tr>
+                <td class="nombre">{{ category.name}}</td>
+                <td class="descripcion">{{category.description}}</td>
+                <td class="eliminar"><a href="{{path('entries_cat', {"id" : category.id })}}" class="button">Ver</a></td>
+                {% if (app.user.id is defined) %}
+                    <td class="eliminar"><a href="{{path('edit_cat', {"id" : category.id })}}" class="button">Editar</a></td>
+                    {% if category.entries|length == 0 %}
+                        <td class="eliminar"><a href="{{path('delete_cat', {"id" : category.id })}}" class="button">Eliminar</a></td>
+                    {% else %}
+                        <td class="eliminar">Hay entradas dentro de esta categoría</td>
+                    {% endif %}
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    
+    </div>
+    
+    
+    
+    
+    
+{% endblock %}

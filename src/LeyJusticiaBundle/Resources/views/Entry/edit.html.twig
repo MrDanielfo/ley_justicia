@@ -1,0 +1,20 @@
+{% extends "LeyJusticiaBundle::layout.html.twig" %}
+
+{% block content %}
+    
+    <div class="contenedor-login-crud"> 
+        
+        <h2 class="titulo-login-crud tags">Editar Entrada</h2>
+        
+        {{form_start(form, {'action': '', 'method': 'POST', 'attr' : { 'class' : 'login-crud' } })}}
+            <label>Imagen: </label>
+            <img src="{{ asset("uploads/"~entry.image)}}" alt="{{entry.title}}" class="articulo">
+            {{form_widget(form.image)}}
+            <label>Etiquetas: </label>
+            {% set tags_clean = tags|trim(",") %}
+            {{form_widget(form.tags, {'value': tags_clean })}}
+        {{form_end(form)}}
+        
+    </div>
+    
+{% endblock %}

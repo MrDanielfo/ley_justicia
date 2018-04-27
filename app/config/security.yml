@@ -1,0 +1,55 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+    encoders:
+        LeyJusticiaBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 4
+     
+    
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        our_db_provider:
+            entity:
+                class: LeyJusticiaBundle:User
+                property: email
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            anonymous: ~
+            provider: our_db_provider
+            form_login:
+                login_path: /login
+                check_path: /login_check
+                username_parameter: _username
+                password_parameter: _password
+            logout:
+                path: /logout
+                target: /
+                
+    access_control:
+        - { path: ^/tags , roles: [ROLE_ADMIN, ROLE_USER] }
+        - { path: ^/tags/add , roles: [ROLE_ADMIN, ROLE_USER]}
+        - { path: ^/tags/delete , roles: [ROLE_ADMIN, ROLE_USER] }
+        - { path: ^/categories/add , roles: [ROLE_ADMIN, ROLE_USER] }
+        - { path: ^/categories/delete , roles: [ROLE_ADMIN, ROLE_USER] }
+        - { path: ^/categories/edit , roles: [ROLE_ADMIN, ROLE_USER] }
+        - { path: ^/entries/add , roles: [ROLE_ADMIN, ROLE_USER] }
+        - { path: ^/entries/delete , roles: [ROLE_ADMIN, ROLE_USER] }
+        - { path: ^/entries/edit , roles: [ROLE_ADMIN, ROLE_USER] }
+        - { path: ^/users/edit , roles: [ROLE_ADMIN, ROLE_USER] }
+            
+        
+            
+            # activate different ways to authenticate
+
+            # http_basic: ~
+            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: ~
+            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html

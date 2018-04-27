@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ley y Justicia: el blog para abogados hecho por abogados">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{% block title %} Ley y Justicia {% endblock %}</title>
+  {% block stylesheets %}
+    <link href="https://fonts.googleapis.com/css?family=Abel|Fira+Sans:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+  {% endblock %}
+</head>
+<body>
+  <div class="contenedor-grande">
+    <header class="miheader">
+      <div class="logo">
+        <h1 class="logotipo"><a class="menu-enlace" href="{{ path("ley_justicia_homepage") }}">Ley y Justicia</a></h1>
+      </div>
+      <nav class="menu-navegacion">
+        <ul class="lista-menu">
+        {% block menu %}
+          <li><a class="menu-enlace" href="{{path('index_entry')}}">Artículos</a></li>
+          <li><a class="menu-enlace" href="{{path('index_cat')}}">Categorías</a></li>
+          <li><a class="menu-enlace" href="{{path('index_user')}}">Especialistas</a></li>
+          <li class="submenu">
+            <a class="menu-enlace" href="#"><i class="fa fa-sign-in" aria-hidden="true"></i><i class="fa fa-sort-desc" aria-hidden="true"></i>
+            </a>
+            <ul class="children">
+            {% if app.user == null %}
+                <li><a class="menu-enlace" href="{{path('register')}}">Regístrate</a></li>
+                <li><a class="menu-enlace" href="{{path('login')}}">Inicia Sesión</a></li>
+            {% else %}
+              <li><a class="menu-enlace" href="{{path('index_tag')}}">Ver Etiquetas</a></li>
+              <li><a class="menu-enlace" href="{{path('index_cat')}}">Ver Categorías</a></li>
+              <li><a class="menu-enlace" href="{{path('logout')}}">Salir</a></li>
+            {% endif %}    
+            </ul>
+          </li>
+        {% endblock %}
+        </ul>
+      </nav>
+      <div class="menu-ham" id="menu-ham">
+        <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+      </div>
+    </header>
+  </div>
+  <div class="contenedor-mediano">
+      
+      <section id="content">
+          {% block content %} Contenido default {% endblock %}
+      </section>
+      
+ 
+  </div>
+  <div class="contenedor-grande">
+    <footer class="mifooter">
+      <div class="logo footer">
+          <h3 class="logotipo">Ley y Justicia</h3>
+      </div>
+      <nav class="menu-navegacion-footer">
+        <ul class="lista-menu-footer">
+          <li><a class="menu-enlace" href="#">Acerca de</a></li>
+          <li><a class="menu-enlace" href="#">Aviso de Privacidad</a></li>
+        </ul>
+      </nav>
+    </footer>
+  </div>
+
+{% block javascript %}
+    
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/scriptslj.js') }}"></script>
+    
+{% endblock %}
+
+</body>
+</html>
